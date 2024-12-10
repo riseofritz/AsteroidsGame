@@ -3,7 +3,7 @@ Spaceship fly;
 Asteroid[] asteroids = new Asteroid[55]; 
 
 public void setup() {
-    size(800, 800);
+    size(500, 500);
     fly = new Spaceship();
     for (int i = 0; i < sky.length; i++) {
         sky[i] = new Stars();
