@@ -1,8 +1,8 @@
-class Star {
+class Stars {
     private int myX, myY, myColor;
 
-    public Star() {
-        myX = (int)(Math.random() * 800); 
+    public Stars() {
+        myX = (int)(Math.random() * 800);
         myY = (int)(Math.random() * 800);
         myColor = color((int)(Math.random() * 250), (int)(Math.random() * 250), (int)(Math.random() * 250));
     }
