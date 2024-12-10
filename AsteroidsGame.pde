@@ -1,19 +1,42 @@
-Star[] sky = new Star[555];
+Stars[] sky = new Stars[555];
 Spaceship fly;
+Asteroid[] asteroids = new Asteroid[16]; 
 
 public void setup() {
     size(800, 800);
     fly = new Spaceship();
     for (int i = 0; i < sky.length; i++) {
-        sky[i] = new Star();
+        sky[i] = new Stars();
+    }
+    for (int i = 0; i < asteroids.length; i++) {
+        asteroids[i] = new Asteroid(); 
     }
 }
 
 public void draw() {
     background(0);
+
+    // Show stars
     for (int i = 0; i < sky.length; i++) {
         sky[i].show();
     }
+
+    // Show and move asteroids
+    for (int i = 0; i < asteroids.length; i++) {
+        if (asteroids[i] != null) { // Check if asteroid exists (not removed)
+            asteroids[i].show();
+            asteroids[i].move();
+
+            // Check for collision with spaceship
+            float d = dist((float)fly.myCenterX, (float)fly.myCenterY, 
+                           (float)asteroids[i].getCenterX(), (float)asteroids[i].getCenterY());
+            if (d < 20) { 
+                asteroids[i] = null; 
+            }
+        }
+    }
+
+    
     fly.move();
     fly.show();
 }
@@ -31,7 +54,7 @@ public void keyPressed() {
     if (key == 'D' || key == 'd') {
         fly.setTurningRight(true);
     }
-    if (key == 'H' || key == 'h'){
+    if (key == 'H' || key == 'h') {
         fly.hyperspace();
     }
 }
@@ -48,20 +71,5 @@ public void keyReleased() {
     }
     if (key == 'D' || key == 'd') {
         fly.setTurningRight(false);
-    }
-}
-
-class Star {
-    private int myX, myY, myColor;
-
-    public Star() {
-        myX = (int)(Math.random() * 800);
-        myY = (int)(Math.random() * 800);
-        myColor = color((int)(Math.random() * 250), (int)(Math.random() * 250), (int)(Math.random() * 250));
-    }
-
-    public void show() {
-        fill(myColor);
-        ellipse(myX, myY, 3, 3);
     }
 }
