@@ -1,6 +1,6 @@
 Stars[] sky = new Stars[555];
 Spaceship fly;
-Asteroid[] asteroids = new Asteroid[55]; 
+Asteroid[] asteroids = new Asteroid[35]; 
 
 public void setup() {
     size(500, 500);
