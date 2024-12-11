@@ -26,17 +26,13 @@ public void draw() {
     }
 
     for (int i = asteroids.size() - 1; i >= 0; i--) { 
-        Asteroid asteroid = asteroids.get(i);
-        asteroid.show();
-        asteroid.move();
+        asteroids.get(i).move();
+        asteroids.get(i).show();
+       
 
-        // Check for collision with spaceship
-        double dx = fly.myCenterX - asteroid.getCenterX();
-        double dy = fly.myCenterY - asteroid.getCenterY();
-        double distanceSquared = dx * dx + dy * dy;
-
-        if (distanceSquared < 400) { 
-            asteroids.remove(i); // Remove asteroid from ArrayList
+        if (dist((float)fly.myCenterX, (float)fly.myCenterY, (float)asteroids.get(i).getCenterX(), (float)asteroids.get(i).getCenterY()) < 47) { 
+            asteroids.remove(i);
+         // Remove asteroid from ArrayList
         }
     }
     fly.move();
