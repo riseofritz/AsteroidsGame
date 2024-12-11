@@ -1,15 +1,19 @@
 Stars[] sky = new Stars[555];
 Spaceship fly;
-Asteroid[] asteroids = new Asteroid[16]; 
+ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>(); 
 
 public void setup() {
-    size(500, 500);
+    size(800, 800);
     fly = new Spaceship();
+
+    // Initialize stars
     for (int i = 0; i < sky.length; i++) {
         sky[i] = new Stars();
     }
-    for (int i = 0; i < asteroids.length; i++) {
-        asteroids[i] = new Asteroid(); 
+
+    // Initialize asteroids
+    for (int i = 0; i < 16; i++) {
+        asteroids.add(new Asteroid());
     }
 }
 
@@ -21,22 +25,20 @@ public void draw() {
         sky[i].show();
     }
 
-    // Show and move asteroids
-    for (int i = 0; i < asteroids.length; i++) {
-        if (asteroids[i] != null) { // Check if asteroid exists (not removed)
-            asteroids[i].show();
-            asteroids[i].move();
+    for (int i = asteroids.size() - 1; i >= 0; i--) { 
+        Asteroid asteroid = asteroids.get(i);
+        asteroid.show();
+        asteroid.move();
 
-            // Check for collision with spaceship
-            float d = dist((float)fly.myCenterX, (float)fly.myCenterY, 
-                           (float)asteroids[i].getCenterX(), (float)asteroids[i].getCenterY());
-            if (d < 20) { 
-                asteroids[i] = null; 
-            }
+        // Check for collision with spaceship
+        double dx = fly.myCenterX - asteroid.getCenterX();
+        double dy = fly.myCenterY - asteroid.getCenterY();
+        double distanceSquared = dx * dx + dy * dy;
+
+        if (distanceSquared < 400) { 
+            asteroids.remove(i); // Remove asteroid from ArrayList
         }
     }
-
-    
     fly.move();
     fly.show();
 }
