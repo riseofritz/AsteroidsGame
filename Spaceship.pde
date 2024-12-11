@@ -15,14 +15,15 @@ class Spaceship extends Floater {
         myYspeed = 0;
         myPointDirection = 0;
     }
-   
-   public void hyperspace(){
-     myCenterX = (int)(Math.random()*490);
-     myCenterY = (int)(Math.random()*490);
-     myXspeed = 0;
-     myYspeed = 0;
-     myPointDirection = (int)(Math.random()*361);
-   }
+
+    public void hyperspace() {
+        myCenterX = (int)(Math.random() * 790);
+        myCenterY = (int)(Math.random() * 790);
+        myXspeed = 0;
+        myYspeed = 0;
+        myPointDirection = (int)(Math.random() * 361);
+    }
+
     public void setTurningLeft(boolean turningLeft) {
         this.turningLeft = turningLeft;
     }
@@ -41,21 +42,21 @@ class Spaceship extends Floater {
 
     public void move() {
         if (turningLeft) {
-            turn(-2); 
+            turn(-2);
         }
         if (turningRight) {
-            turn(2); // 
+            turn(2);
         }
         if (accelerating) {
-            accelerate(0.05); 
+            accelerate(0.05);
         }
         if (decelerating) {
-            accelerate(-0.05); 
+            accelerate(-0.05);
         }
-        super.move(); 
+        super.move();
     }
 
     public void show() {
-        super.show(); 
+        super.show();
     }
 }
